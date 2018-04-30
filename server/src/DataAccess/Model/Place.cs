@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccess.Model
+{
+    public class Place
+    {
+        [Key]
+        public int PLACE_ID { get; set; }
+
+        [Required]
+        [ForeignKey("Province")]
+        public int PROV_ID { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string PLACE_NAME { get; set; }
+
+        public Province Province { get; set; }
+        public ICollection<User> Users { get; set; }
+    }
+}

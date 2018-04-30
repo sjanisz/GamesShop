@@ -1,0 +1,6 @@
+dist/
+debug/
+release/
+bin/
+obj/
+packages/
