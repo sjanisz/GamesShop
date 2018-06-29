@@ -13,18 +13,19 @@ namespace DataAccess.Model
         [Key]
         public int USER_ID { get; set; }
 
-        [Required]
         [ForeignKey("Place")]
         public int PLACE_ID { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(15)]
+        [Index(IsUnique = true)]
         public string USER_LOGIN { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(320)]
+        [EmailAddress]
         public string USER_EMAIL { get; set; }
 
         [Required]
