@@ -11,7 +11,12 @@ namespace ShopManager.Controllers
     {
         public string GetUsers()
         {
-            return "users...";
+            return "users...dd";
+        }
+
+        public string Get(int a)
+        {
+            return a.ToString();
         }
     }
 }
