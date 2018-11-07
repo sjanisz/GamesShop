@@ -1,0 +1,8 @@
+1. Global.asax:
+	a) Inherits value should be: Inherits="{projectName}.{globalAsaxCsClassName}";
+	b) build output should be set to bin\
+2. SSMS: create user and enable logging by sql server authentication: RMB on server -> Properties -> Security -> sql server and windows authentication mode
+3. Fill database with bulk insert 
+
+
+DATA VALIDATION LEVELS: backend layers + frontend?

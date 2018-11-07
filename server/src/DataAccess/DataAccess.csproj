@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201805032017162_uniqueUserLogin.Designer.cs">
       <DependentUpon>201805032017162_uniqueUserLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810271612202_userUpdate.cs" />
+    <Compile Include="Migrations\201810271612202_userUpdate.Designer.cs">
+      <DependentUpon>201810271612202_userUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Language.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805032017162_uniqueUserLogin.resx">
       <DependentUpon>201805032017162_uniqueUserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810271612202_userUpdate.resx">
+      <DependentUpon>201810271612202_userUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

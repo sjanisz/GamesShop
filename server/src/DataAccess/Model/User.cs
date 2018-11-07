@@ -37,8 +37,16 @@ namespace DataAccess.Model
         public string USER_LASTNAME { get; set; }
 
         [Required]
-        [Column(TypeName = "VARCHAR")]
+        [StringLength(50)]
+        public string USER_STREET { get; set; }
+
+        [Required]
         [StringLength(10)]
+        public string USER_FLAT { get; set; }
+
+        [Required]
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(6)]
         public string USER_POSTCODE { get; set; }
 
         [Required]
