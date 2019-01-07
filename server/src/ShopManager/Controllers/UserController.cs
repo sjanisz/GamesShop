@@ -12,13 +12,13 @@ namespace ShopManager.Controllers
     public class UserController : ApiController
     {
         [Route("api/users")] 
-        public string GetUser() // todo: change return to List<User>
+        public string GetUsers() // todo: change return to List<User>
         {
             throw new NotImplementedException();
         }
 
         [Route("api/users/{a}")]
-        public string Get(int a)
+        public string GetUser(int a)
         {
             throw new NotImplementedException();
         }

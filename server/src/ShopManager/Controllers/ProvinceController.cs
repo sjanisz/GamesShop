@@ -11,11 +11,11 @@ namespace ShopManager.Controllers
 {
     public class ProvinceController : ApiController
     {
-        [Route("api/provinces")]
-        public List<Province> GetProvince()
+        [Route("api/provincesWithPlaces")]
+        public List<Province> GetProvincesWithPlaces()
         {
             Service.Service service = new Service.Service();
-            return service.GetAllProvinces();
+            return service.GetAllProvincesWithPlaces();
         }
     }
 }

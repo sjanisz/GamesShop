@@ -4,3 +4,8 @@ release/
 bin/
 obj/
 packages/
+server/src/.vs/GamesShop/DesignTimeBuild/.dtbcache
+server/src/.vs/GamesShop/DesignTimeBuild/.dtbcache
+server/src/.vs/GamesShop/DesignTimeBuild/.dtbcache
+*.ide-shm
+server/src/.vs/GamesShop/v15/Server/sqlite3/storage.ide-shm

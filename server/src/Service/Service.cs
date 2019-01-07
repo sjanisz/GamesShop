@@ -11,6 +11,7 @@ namespace Service
 {
     public class Service
     {
+        /* Unnecessary for now
         public List<Place> GetAllPlaces()
         {
             List<Place> result = new List<Place>();
@@ -19,30 +20,31 @@ namespace Service
             {
                 foreach (DataAccess.Model.Place place in context.Places.Include(p => p.Province).ToList())
                 {
-                    result.Add(new Place() { PlaceName = place.PLACE_NAME, ProvinceName = place.Province.PROV_NAME });
+                    result.Add(new Place() { PlaceID = place.PLACE_ID, PlaceName = place.PLACE_NAME });
                 }
             }
 
             return result;
         }
+        */
 
-        public List<Province> GetAllProvinces()
+        public List<Province> GetAllProvincesWithPlaces()
         {
             List<Province> result = new List<Province>();
-            List<string> placeNames;
+            List<Place> places;
 
             using (var context = new ShopContext())
             {
                 foreach(DataAccess.Model.Province province in context.Provinces.Include(p => p.Places).ToList())
                 {
-                    placeNames = new List<string>();
+                    places = new List<Place>();
 
                     foreach(DataAccess.Model.Place place in province.Places)
                     {
-                        placeNames.Add(place.PLACE_NAME);
+                        places.Add(new Place() { PlaceID = place.PLACE_ID, PlaceName = place.PLACE_NAME});
                     }
 
-                    result.Add(new Province() { ProvinceName = province.PROV_NAME, PlaceNames = new List<string>(placeNames) });
+                    result.Add(new Province() { ProvinceID = province.PROV_ID, ProvinceName = province.PROV_NAME, Places = new List<Place>(places) });
                 }
             }
 

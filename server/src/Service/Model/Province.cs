@@ -8,7 +8,8 @@ namespace Service.Model
 {
     public class Province
     {
+        public int ProvinceID { get; set; }
         public string ProvinceName { get; set; }
-        public List<string> PlaceNames { get; set; }
+        public List<Place> Places { get; set; }
     }
 }
