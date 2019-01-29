@@ -1,13 +1,20 @@
 // Variables
 var provincesWithPlaces = [];
+var provinceSelect;
+var placeInput;
 
 const promiseGetProvincesWithPlaces = getProvincesWithPlaces();
 // Functions Onload
 window.onload = function(){
+    provinceSelect = 
+        document.forms["registration"].elements["registration"].elements["remainingData"].elements["province"];
+    placeInput =
+        document.forms["registration"].elements["registration"].elements["remainingData"].elements["place"];
+    
     // TODO: Full page load bar?
     promiseGetProvincesWithPlaces.then(function(){
         loadProvincesToSelect();
-        document.getElementById('province').addEventListener(
+        provinceSelect.addEventListener(
             "change", attachPlacesListForProvinceToPlaceTextInput, false);
         
         console.log("promise ok");
@@ -35,14 +42,14 @@ function loadProvincesToSelect(){
     defaultOption.setAttribute("value", "");
     defaultOption.setAttribute("text", "Choose province");
 
-    document.getElementById('province').appendChild(defaultOption);
+    provinceSelect.appendChild(defaultOption);
 
     provincesWithPlaces.forEach(function(province){
         var option = document.createElement("option");
         option.text = province['ProvinceName'];
         option.value = province['ProvinceID'];
 
-        document.getElementById('province').appendChild(option);
+        provinceSelect.appendChild(option);
     })
 };
 
@@ -58,7 +65,6 @@ function attachPlacesListForProvinceToPlaceTextInput(){
         placesList.innerHTML = "";
     }
 
-    var provinceSelect = document.getElementById('province');
     var selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
 
     var selectedProvince;
@@ -71,8 +77,6 @@ function attachPlacesListForProvinceToPlaceTextInput(){
             break;
         }
     }
-
-    var placeInput = document.getElementById('place');
 
     if(selectedProvince !== undefined)
     {
