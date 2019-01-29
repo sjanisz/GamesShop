@@ -92,15 +92,3 @@ function attachPlacesListForProvinceToPlaceTextInput(){
         placeInput.setAttribute("placeholder", "Choose province first");
     }
 }
-/*
-list="xList"
-
-for place:
-<datalist id="xList">
-                            <option value="Internet Explorer">
-                            <option value="Firefox">
-                            <option value="Chrome">
-                            <option value="Opera">
-                            <option value="Safari">
-                        </datalist>
-*/
