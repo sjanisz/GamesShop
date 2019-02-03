@@ -6,3 +6,6 @@
 
 
 DATA VALIDATION LEVELS: backend layers + frontend?
+
+Best practices for webapi (especially table):
+https://docs.microsoft.com/pl-pl/azure/architecture/best-practices/api-design

@@ -22,5 +22,11 @@ namespace ShopManager.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [Route("api/users")]
+        public bool RegisterUser()
+        {
+
+        }
     }
 }

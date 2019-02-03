@@ -16,9 +16,8 @@ window.onload = function(){
         loadProvincesToSelect();
         provinceSelect.addEventListener(
             "change", attachPlacesListForProvinceToPlaceTextInput, false);
-        
-        console.log("promise ok");
     }, function(){
+        // TODO: What to do on promise fail?
         console.log("promise error");
     })
 };
