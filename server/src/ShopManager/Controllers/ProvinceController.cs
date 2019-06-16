@@ -11,11 +11,23 @@ namespace ShopManager.Controllers
 {
     public class ProvinceController : ApiController
     {
-        [Route("api/provincesWithPlaces")]
-        public List<Province> GetProvincesWithPlaces()
+        private Service.Service service;
+
+        public ProvinceController()
         {
-            Service.Service service = new Service.Service();
-            return service.GetAllProvincesWithPlaces();
+            service = new Service.Service();
+        }
+
+        [HttpGet]
+        [Route("api/provincesWithPlaces")]
+        public IHttpActionResult GetProvincesWithPlaces()
+        {
+            List<Province> provinces = service.GetAllProvincesWithPlaces();
+
+            if (provinces.Count == 0)
+                return Content(HttpStatusCode.ServiceUnavailable, "Could not get provinces with places from database.");
+
+            return Ok(provinces);
         }
     }
 }

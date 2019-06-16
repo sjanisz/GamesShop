@@ -1,26 +1,38 @@
 // Variables
 var provincesWithPlaces = [];
-var provinceSelect;
-var placeInput;
+var provinceSelectElem;
+var placeInputElem;
+var registrationFormElem;
 
-const promiseGetProvincesWithPlaces = getProvincesWithPlaces();
-// Functions Onload
+// Call onload after whole document will be loaded and all DOM elemnts will be available
 window.onload = function(){
-    provinceSelect = 
-        document.forms["registration"].elements["registration"].elements["remainingData"].elements["province"];
-    placeInput =
-        document.forms["registration"].elements["registration"].elements["remainingData"].elements["place"];
-    
-    // TODO: Full page load bar?
-    promiseGetProvincesWithPlaces.then(function(){
+    // Get DOM elements e.g. for reacting on their events
+    registrationFormElem =
+        document.forms["registration"];
+    provinceSelectElem = 
+        registrationFormElem.elements["registration"].elements["remainingData"].elements["province"];
+    placeInputElem =
+        registrationFormElem.elements["registration"].elements["remainingData"].elements["place"];
+
+    asyncOnloadFunctions().then(function(){
         loadProvincesToSelect();
-        provinceSelect.addEventListener(
-            "change", attachPlacesListForProvinceToPlaceTextInput, false);
-    }, function(){
-        // TODO: What to do on promise fail?
-        console.log("promise error");
+
+        // addEventListeners
+        provinceSelectElem.addEventListener(
+            "change", attachPlacesListForProvinceToPlaceTextInput_onChange, false);
+        registrationFormElem.addEventListener(
+            "submit", registrationForm_onSubmit, false);
+    }).catch(function(){
+        //Catch ANY (first) onload promises error
     })
 };
+
+function asyncOnloadFunctions(){
+    // add more promises there
+    var promiseGetProvincesWithPlaces = getProvincesWithPlaces();
+    
+    return Promise.all([promiseGetProvincesWithPlaces]);
+}
 
 function getProvincesWithPlaces(){
     var promise = fetch("http://localhost:58481/api/provincesWithPlaces")
@@ -34,37 +46,39 @@ function getProvincesWithPlaces(){
     return promise;
 };
 
+// 
 function loadProvincesToSelect(){
+    // Create default province option element with proper properties
     var defaultOption = document.createElement("option");
-    defaultOption.setAttribute("disabled", "");
-    defaultOption.setAttribute("selected", "");
-    defaultOption.setAttribute("value", "");
-    defaultOption.setAttribute("text", "Choose province");
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.text = "Choose province";
 
-    provinceSelect.appendChild(defaultOption);
+    provinceSelectElem.appendChild(defaultOption);
 
     provincesWithPlaces.forEach(function(province){
         var option = document.createElement("option");
-        option.text = province['ProvinceName'];
+        option.textContent = province['ProvinceName'];
         option.value = province['ProvinceID'];
 
-        provinceSelect.appendChild(option);
+        provinceSelectElem.appendChild(option);
     })
 };
 
-function attachPlacesListForProvinceToPlaceTextInput(){
+function attachPlacesListForProvinceToPlaceTextInput_onChange(){
     var placesList = document.getElementById('selectedProvincePlacesList');
     
     if(placesList===null)
     {
         placesList = document.createElement("datalist");
-        placesList.setAttribute("id", "selectedProvincePlacesList");
+        placesList.id = "selectedProvincePlacesList";
+
         document.body.appendChild(placesList);
     }else{
         placesList.innerHTML = "";
     }
 
-    var selectedProvinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
+    var selectedProvinceName = provinceSelectElem.options[provinceSelectElem.selectedIndex].text;
 
     var selectedProvince;
 
@@ -79,19 +93,30 @@ function attachPlacesListForProvinceToPlaceTextInput(){
 
     if(selectedProvince !== undefined)
     {
-        placeInput.removeAttribute("disabled");
-        placeInput.removeAttribute("placeholder");
+        placeInputElem.removeAttribute("disabled");
+        placeInputElem.removeAttribute("placeholder");
 
         for(place of selectedProvince["Places"])
         {
             var placeOption = document.createElement("option");
-            placeOption.setAttribute("value", place["PlaceName"]);
+            placeOption.value = place["PlaceName"];
 
             placesList.appendChild(placeOption);
         }
     }else{
         //selectedProvince undefined/null? still block place input
-        placeInput.setAttribute("disabled", "");
-        placeInput.setAttribute("placeholder", "Choose province first");
+        placeInputElem.disabled = true;
+        placeInputElem.placeholder = "Choose province first";
     }
+}
+
+function registrationForm_onSubmit(e){
+    e.preventDefault();
+    var formData = new FormData(registrationFormElem);
+    
+    // Get formData, validate from GUI point of view
+    // failure: stay on site and print error
+    // ok: go to another page with "Successful" message
+
+    
 }

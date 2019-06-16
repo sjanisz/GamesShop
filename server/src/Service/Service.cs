@@ -11,23 +11,6 @@ namespace Service
 {
     public class Service
     {
-        /* Unnecessary for now
-        public List<Place> GetAllPlaces()
-        {
-            List<Place> result = new List<Place>();
-
-            using (var context = new ShopContext())
-            {
-                foreach (DataAccess.Model.Place place in context.Places.Include(p => p.Province).ToList())
-                {
-                    result.Add(new Place() { PlaceID = place.PLACE_ID, PlaceName = place.PLACE_NAME });
-                }
-            }
-
-            return result;
-        }
-        */
-
         public List<Province> GetAllProvincesWithPlaces()
         {
             List<Province> result = new List<Province>();
@@ -49,6 +32,58 @@ namespace Service
             }
 
             return result;
+        }
+        
+        public bool RegisterUser(string login, string password, string email, string firstName, string lastName,
+            string street, string flatNumber, string postCode, int provinceId, string placeName)
+        {
+            // TODO: validation here
+
+            //Place validation - temporary just add to database, in future admin must check the place name before
+            //it will be added to hint GUI textbox (e.g. to avoid vulgarisms)
+
+            using (var context = new ShopContext())
+            {
+                List<DataAccess.Model.Place> places;
+
+                try
+                {
+                    places = context.Provinces.First(p => p.PROV_ID == provinceId).Places.ToList();
+                }
+                catch (ArgumentNullException exception)
+                {
+                    throw new Exception("Failed to retrieve province with id {provinceId}", exception);
+                }
+
+                DataAccess.Model.Place place = places.FirstOrDefault(p => p.PLACE_NAME == placeName);
+
+                if (place == null)
+                {
+                    DataAccess.Model.Place newPlace = new DataAccess.Model.Place()
+                    {
+                        PLACE_NAME = placeName,
+                        Province = context.Provinces.First(p => p.PROV_ID == provinceId)
+                    };
+                }
+
+                //public string USER_PASSHASH { get; set; }
+                //public string USER_PASSSALT { get; set; }
+                //public DateTime USER_REGDATE { get; set; }
+
+                DataAccess.Model.User user = new DataAccess.Model.User()
+                {
+                    USER_LOGIN = login,//must be unique, handle exception?
+                    USER_EMAIL = email,//do not have to be unique, validate format?
+                    USER_FIRSTNAME = firstName,
+                    USER_LASTNAME = lastName,
+                    USER_STREET = street,
+                    USER_FLAT = flatNumber,
+                    USER_POSTCODE = postCode,
+                    Place = place
+                };
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

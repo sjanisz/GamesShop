@@ -23,10 +23,14 @@ namespace ShopManager.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpPost]
         [Route("api/users")]
-        public bool RegisterUser()
+        public bool RegisterUser(string login, string password, string email, string firstName, string lastName,
+            string street, string flatNumber, string postCode, int provinceId, string placeName)
         {
+            System.Diagnostics.Debug.WriteLine("login " + login);
 
+            return true;
         }
     }
 }
