@@ -15,48 +15,48 @@ namespace DataAccess.Model
 
         [ForeignKey("Place")]
         public int PLACE_ID { get; set; }
-
+        
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(15)]
+        [MaxLength(15), MinLength(5)]
         [Index(IsUnique = true)]
         public string USER_LOGIN { get; set; }
-
+        
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(320)]
+        [MaxLength(320),MinLength(3)]
         [EmailAddress]
         public string USER_EMAIL { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string USER_FIRSTNAME { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string USER_LASTNAME { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string USER_STREET { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [MaxLength(10)]
         public string USER_FLAT { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(6)]
+        [MaxLength(6), MinLength(6)]
         public string USER_POSTCODE { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(100)]
+        [MaxLength(100)]
         public string USER_PASSHASH { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(100)]
+        [MaxLength(100)]
         public string USER_PASSSALT { get; set; }
 
         [Required]

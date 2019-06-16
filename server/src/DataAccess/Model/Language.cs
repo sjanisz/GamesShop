@@ -14,7 +14,7 @@ namespace DataAccess.Model
         public int LANG_ID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [MaxLength(20), MinLength(3)]
         public string LANG_NAME { get; set; }
 
         [Required]

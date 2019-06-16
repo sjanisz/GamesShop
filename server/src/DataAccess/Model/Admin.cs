@@ -15,30 +15,30 @@ namespace DataAccess.Model
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(15)]
+        [MaxLength(15), MinLength(2)]
         public string ADMIN_LOGIN { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string ADMIN_FIRSTNAME { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string ADMIN_LASTNAME { get; set; }
 
         [Required]
         [Column(TypeName = "char")]
-        [StringLength(1, MinimumLength =1)]
+        [MaxLength(1), MinLength(1)]
         public string ADMIN_TYPE { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(100)]
+        [MaxLength(100), MinLength(1)]
         public string ADMIN_PASSHASH { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(100)]
+        [MaxLength(100), MinLength(1)]
         public string ADMIN_SALTHASH { get; set; }
     }
 }

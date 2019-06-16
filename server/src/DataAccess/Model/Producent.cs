@@ -14,14 +14,14 @@ namespace DataAccess.Model
         public int PRODUCENT_ID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [MaxLength(20), MinLength(2)]
         public string PRODUCENT_NAME { get; set; }
 
-        [StringLength(200)]
+        [MaxLength(200)]
         public string PRODUCENT_DESC { get; set; }
 
         [Column(TypeName = "VARCHAR")]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string PRODUCENT_COUNTRY { get; set; }
 
         public ICollection<Product> Products { get; set; }

@@ -18,7 +18,7 @@ namespace DataAccess.Model
         public int PROV_ID { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string PLACE_NAME { get; set; }
 
         public Province Province { get; set; }

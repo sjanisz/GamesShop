@@ -22,6 +22,8 @@ window.onload = function(){
             "change", attachPlacesListForProvinceToPlaceTextInput_onChange, false);
         registrationFormElem.addEventListener(
             "submit", registrationForm_onSubmit, false);
+        registrationFormElem.addEventListener(
+            "change", registrationForm_onChange, false);
     }).catch(function(){
         //Catch ANY (first) onload promises error
     })
@@ -113,10 +115,26 @@ function attachPlacesListForProvinceToPlaceTextInput_onChange(){
 function registrationForm_onSubmit(e){
     e.preventDefault();
     var formData = new FormData(registrationFormElem);
+
+    validateProvinceSelectElem();
     
     // Get formData, validate from GUI point of view
     // failure: stay on site and print error
     // ok: go to another page with "Successful" message
 
     
+}
+
+function registrationForm_onChange()
+{
+    provinceSelectElem.setCustomValidity("");
+}
+
+function validateProvinceSelectElem()
+{
+    var provinceNotSelected = provinceSelectElem.options[provinceSelectElem.selectedIndex].disabled;
+    if(provinceNotSelected === true)
+    {
+        provinceSelectElem.setCustomValidity("Select province");
+    }
 }

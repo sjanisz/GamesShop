@@ -21,7 +21,7 @@ namespace DataAccess.Model
         public int PRODUCENT_ID { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50), MinLength(2)]
         public string PROD_NAME { get; set; }
 
         [Required]
@@ -31,11 +31,11 @@ namespace DataAccess.Model
         [Required]
         public int PROD_AVAILABLE_AMOUNT { get; set; }
 
-        [StringLength(200)]
+        [MaxLength(200)]
         public string PROD_DESC { get; set; }
 
         [Column(TypeName ="VARCHAR")]
-        [StringLength(512)]
+        [MaxLength(512)]
         public string PROD_VID_URL { get; set; }
 
         public Pegi Pegi { get; set; }

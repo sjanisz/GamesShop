@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201810271612202_userUpdate.Designer.cs">
       <DependentUpon>201810271612202_userUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906161951089_MinMaxLengthConstrainsRefactor.cs" />
+    <Compile Include="Migrations\201906161951089_MinMaxLengthConstrainsRefactor.Designer.cs">
+      <DependentUpon>201906161951089_MinMaxLengthConstrainsRefactor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Admin.cs" />
     <Compile Include="Model\Language.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810271612202_userUpdate.resx">
       <DependentUpon>201810271612202_userUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906161951089_MinMaxLengthConstrainsRefactor.resx">
+      <DependentUpon>201906161951089_MinMaxLengthConstrainsRefactor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

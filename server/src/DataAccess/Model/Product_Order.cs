@@ -21,7 +21,7 @@ namespace DataAccess.Model
         [Required]
         public int PO_AMOUNT { get; set; }
 
-        [StringLength(100)]
+        [MaxLength(100)]
         public string PO_ADDITIONAL_INFO { get; set; }
 
         public Order Order { get; set; }

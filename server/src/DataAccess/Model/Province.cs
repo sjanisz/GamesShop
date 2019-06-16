@@ -13,7 +13,7 @@ namespace DataAccess.Model
         public int PROV_ID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [MaxLength(20), MinLength(2)]
         public string PROV_NAME { get; set; }
 
         public ICollection<Place> Places { get; set; }

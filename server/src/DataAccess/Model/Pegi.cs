@@ -15,7 +15,7 @@ namespace DataAccess.Model
 
         [Required]
         [Column(TypeName ="VARCHAR")]
-        [StringLength(512)]
+        [MaxLength(512)]
         public string PEGI_IMG_URL { get; set; }
 
         [Required]
