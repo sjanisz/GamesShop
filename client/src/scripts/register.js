@@ -1,29 +1,37 @@
 // Variables
 var provincesWithPlaces = [];
+var registrationFormElem;
+var loginInputElem;
 var provinceSelectElem;
 var placeInputElem;
-var registrationFormElem;
 
 // Call onload after whole document will be loaded and all DOM elemnts will be available
 window.onload = function(){
     // Get DOM elements e.g. for reacting on their events
     registrationFormElem =
         document.forms["registration"];
+    // Main user data
+    loginInputElem =
+        registrationFormElem.elements["registration"].elements["mainData"].elements["login"];
+    // Remaining user data
     provinceSelectElem = 
         registrationFormElem.elements["registration"].elements["remainingData"].elements["province"];
     placeInputElem =
         registrationFormElem.elements["registration"].elements["remainingData"].elements["place"];
+    
 
     asyncOnloadFunctions().then(function(){
         loadProvincesToSelect();
 
         // addEventListeners
-        provinceSelectElem.addEventListener(
-            "change", attachPlacesListForProvinceToPlaceTextInput_onChange, false);
         registrationFormElem.addEventListener(
             "submit", registrationForm_onSubmit, false);
         registrationFormElem.addEventListener(
             "change", registrationForm_onChange, false);
+        loginInputElem.addEventListener(
+            "change", loginInputElem_onChange, false);
+        provinceSelectElem.addEventListener(
+            "change", attachPlacesListForProvinceToPlaceTextInput_onChange, false);
     }).catch(function(){
         //Catch ANY (first) onload promises error
     })
@@ -122,12 +130,18 @@ function registrationForm_onSubmit(e){
     // failure: stay on site and print error
     // ok: go to another page with "Successful" message
 
-    
+    validationResult = validateRegisterFormData();
+
 }
 
 function registrationForm_onChange()
 {
     provinceSelectElem.setCustomValidity("");
+}
+
+function loginInputElem_onChange()
+{
+    loginInputElem.setCustomValidity("");
 }
 
 function validateProvinceSelectElem()
@@ -136,5 +150,18 @@ function validateProvinceSelectElem()
     if(provinceNotSelected === true)
     {
         provinceSelectElem.setCustomValidity("Select province");
+    }
+}
+
+function validateRegisterFormData()
+{
+    validationResult = new Boolean(true);
+    var formData = new FormData(registrationFormElem);
+
+    var login = formData.get("login");
+    var loginRegex = /(?=[^0-9])(?=[^a-z])(?=[^A-Z])/; //(?= expr) - using for ANDing
+    if(loginRegex.test(login))
+    {
+        loginInputElem.setCustomValidity("Wrong characters");
     }
 }
