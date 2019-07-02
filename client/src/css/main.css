@@ -1,3 +1,4 @@
+/*Cookies*/
 section.cookies {
     position: fixed;
     bottom:30px;
@@ -14,14 +15,12 @@ section.cookies {
     min-height: 50px;
 }
 
-section.cookies button
-{
+section.cookies button {
     float: right;
     border-radius: 50%;
 }
 
-section.cookies p
-{
+section.cookies p {
     display: inline;
 }
 
@@ -35,3 +34,40 @@ label {
     width: 35%;
 }
 
+/*API data fetching*/
+#bottomLoading {
+    position: fixed;
+
+    background-color: yellow;
+    width: 200px;
+    margin: auto;
+
+    border-style: solid;
+    border-width: 1px;
+}
+
+.bottomLoadingMoveUp {
+    bottom : -200px;
+
+    animation-name: bottomLoadingMoveUpTransition;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bottomLoadingMoveUpTransition {
+    from {transform: translateY(0px);}
+    to {transform: translateY(-210px);}
+}
+
+.bottomLoadingMoveDown {
+    bottom: 10px;
+
+    animation-name: bottomLoadingMoveDownTransition;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bottomLoadingMoveDownTransition {
+    from {transform: translateY(0px);}
+    to {transform: translateY(210px);}
+}

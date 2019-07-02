@@ -4,6 +4,7 @@ var registrationFormElem;
 var loginInputElem;
 var provinceSelectElem;
 var placeInputElem;
+var bottomLoadingDivElem;
 
 // Call onload after whole document will be loaded and all DOM elemnts will be available
 window.onload = function(){
@@ -18,8 +19,16 @@ window.onload = function(){
         registrationFormElem.elements["registration"].elements["remainingData"].elements["province"];
     placeInputElem =
         registrationFormElem.elements["registration"].elements["remainingData"].elements["place"];
-    
+    bottomLoadingDivElem = document.getElementById("bottomLoading");
 
+    // Loading resources bottom bar show (hide at the end of async functions load)
+    applyCSSAndHTMLBeforeLoadingResources();
+    
+    // TODO: move it to end of async after completion
+    setTimeout(() => {
+        applyCSSAndHTMLAfterLoadingResources();
+    }, 4000);
+    
     asyncOnloadFunctions().then(function(){
         loadProvincesToSelect();
 
@@ -164,4 +173,15 @@ function validateRegisterFormData()
     {
         loginInputElem.setCustomValidity("Wrong characters");
     }
+}
+
+function applyCSSAndHTMLBeforeLoadingResources()
+{
+    bottomLoadingDivElem.classList.add("bottomLoadingMoveUp");
+}
+
+function applyCSSAndHTMLAfterLoadingResources()
+{
+    bottomLoadingDivElem.classList.remove("bottomLoadingMoveUp");
+    bottomLoadingDivElem.classList.add("bottomLoadingMoveDown");
 }
