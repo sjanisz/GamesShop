@@ -10,3 +10,4 @@ server/src/.vs/GamesShop/v15/
 *.dtbcache
 *.suo
 .vs/
+server/src/.vs/GamesShop/v15/Server/sqlite3/storage.ide-wal
