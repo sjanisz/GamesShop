@@ -52,10 +52,12 @@
                     <label>Flat number:
                         <input type="text" name="flatNumber" maxlength="10" required>
                     </label>
-                    <label>Postcode:
-                        <input type="text" name="postcode_partOne" pattern="[0-9]{2}" required minlength="2" maxlength="2">
-                        -
-                        <input type="text" name="postcode_partTwo" pattern="[0-9]{3}" required minlength="3" maxlength="3">
+                    <label >Postcode:
+                        <div style="white-space: nowrap">
+                            <input type="text" name="postcode_partOne" pattern="[0-9]{2}" required minlength="2" maxlength="2">
+                            -
+                            <input type="text" name="postcode_partTwo" pattern="[0-9]{3}" required minlength="3" maxlength="3">
+                        </div>
                     </label>
                     <label>Province:
                         <select name="province"></select>

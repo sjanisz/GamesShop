@@ -1,3 +1,13 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*Cookies*/
 section.cookies {
     position: fixed;
@@ -38,6 +48,10 @@ label {
 #bottomLoading {
     position: fixed;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: yellow;
     width: 200px;
     margin: auto;
@@ -55,8 +69,9 @@ label {
 }
 
 @keyframes bottomLoadingMoveUpTransition {
-    from {transform: translateY(0px);}
-    to {transform: translateY(-210px);}
+    to {
+        transform: translateY(-210px);
+    }
 }
 
 .bottomLoadingMoveDown {
@@ -68,6 +83,7 @@ label {
 }
 
 @keyframes bottomLoadingMoveDownTransition {
-    from {transform: translateY(0px);}
-    to {transform: translateY(210px);}
+    to {
+        transform: translateY(210px);
+    }
 }

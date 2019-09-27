@@ -25,9 +25,9 @@ window.onload = function(){
     applyCSSAndHTMLBeforeLoadingResources();
     
     // TODO: move it to end of async after completion
-    setTimeout(() => {
-        applyCSSAndHTMLAfterLoadingResources();
-    }, 4000);
+    // setTimeout(() => {
+    //     applyCSSAndHTMLAfterLoadingResources();
+    // }, 4000);
     
     asyncOnloadFunctions().then(function(){
         loadProvincesToSelect();
@@ -41,6 +41,8 @@ window.onload = function(){
             "change", loginInputElem_onChange, false);
         provinceSelectElem.addEventListener(
             "change", attachPlacesListForProvinceToPlaceTextInput_onChange, false);
+
+        applyCSSAndHTMLAfterLoadingResources();
     }).catch(function(){
         //Catch ANY (first) onload promises error
     })
