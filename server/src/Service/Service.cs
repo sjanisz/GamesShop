@@ -21,13 +21,13 @@ namespace Service
                 foreach(DataAccess.Model.Province province in context.Provinces.Include(p => p.Places).ToList())
                 {
                     places = new List<Place>();
-
+                    
                     foreach(DataAccess.Model.Place place in province.Places)
                     {
-                        places.Add(new Place() { PlaceID = place.PLACE_ID, PlaceName = place.PLACE_NAME});
+                        places.Add(new Place() {PlaceName = place.PLACE_NAME, ProvinceName = province.PROV_NAME});
                     }
 
-                    result.Add(new Province() { ProvinceID = province.PROV_ID, ProvinceName = province.PROV_NAME, Places = new List<Place>(places) });
+                    result.Add(new Province() { ProvinceName = province.PROV_NAME, Places = new List<Place>(places) });
                 }
             }
 
@@ -39,6 +39,14 @@ namespace Service
         {
             // TODO: validation here
 
+            // login
+            // length: 5-15 characters
+            // loginRegex: /(?=[^0-9])(?=[^a-z])(?=[^A-Z])/;
+            if ((login.Length < 5) || (login.Length > 15))
+            {
+                //throw new HttpResponseException("Customer Name cannot be empty", HttpStatusCode.BadRequest)
+            }
+
             //Place validation - temporary just add to database, in future admin must check the place name before
             //it will be added to hint GUI textbox (e.g. to avoid vulgarisms)
 
@@ -46,13 +54,15 @@ namespace Service
             {
                 List<DataAccess.Model.Place> places;
 
+
+
                 try
                 {
-                    places = context.Provinces.First(p => p.PROV_ID == provinceId).Places.ToList();
+                    places = context.Provinces.Include(p => p.Places).First(p => p.PROV_ID == provinceId).Places.ToList();
                 }
                 catch (ArgumentNullException exception)
                 {
-                    throw new Exception("Failed to retrieve province with id {provinceId}", exception);
+                    throw new Exception("Failed to retrieve province with id " + provinceId, exception);
                 }
 
                 DataAccess.Model.Place place = places.FirstOrDefault(p => p.PLACE_NAME == placeName);

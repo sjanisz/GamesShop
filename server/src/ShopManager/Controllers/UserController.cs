@@ -11,6 +11,13 @@ namespace ShopManager.Controllers
 {
     public class UserController : ApiController
     {
+        private Service.Service service;
+
+        public UserController()
+        {
+            service = new Service.Service();
+        }
+
         [Route("api/users")] 
         public string GetUsers() // todo: change return to List<User>
         {
@@ -25,12 +32,15 @@ namespace ShopManager.Controllers
 
         [HttpPost]
         [Route("api/users")]
-        public bool RegisterUser(string login, string password, string email, string firstName, string lastName,
+        public IHttpActionResult RegisterUser(string login, string password, string email, string firstName, string lastName,
             string street, string flatNumber, string postCode, int provinceId, string placeName)
         {
             System.Diagnostics.Debug.WriteLine("login " + login);
+            
+            service.RegisterUser(login, password, email, firstName, lastName, street, flatNumber, postCode,
+                provinceId, placeName);
 
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

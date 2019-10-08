@@ -135,7 +135,7 @@ function registrationForm_onSubmit(e){
     e.preventDefault();
     var formData = new FormData(registrationFormElem);
 
-    validateProvinceSelectElem();
+    
     
     // Get formData, validate from GUI point of view
     // failure: stay on site and print error
@@ -167,6 +167,9 @@ function validateProvinceSelectElem()
 function validateRegisterFormData()
 {
     validationResult = new Boolean(true);
+    
+    validateProvinceSelectElem();
+
     var formData = new FormData(registrationFormElem);
 
     var login = formData.get("login");

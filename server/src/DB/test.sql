@@ -14,4 +14,12 @@ USE GameShopDB;
 --ON place.PROV_ID = prov.PROV_ID
 --WHERE place.PLACE_NAME IN (SELECT PLACE_NAME FROM Place GROUP BY PLACE_NAME HAVING COUNT(*) > 1)
 
-SELECT * FROM "User"
+--SELECT * FROM "User"
+
+--SELECT * FROM "Province"
+
+SELECT t.[text]
+FROM sys.dm_exec_cached_plans AS p
+CROSS APPLY sys.dm_exec_sql_text(p.plan_handle) AS t
+
+--WHERE t.[text] LIKE N'%something unique about your query%';

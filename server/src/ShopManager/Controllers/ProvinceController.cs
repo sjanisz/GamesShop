@@ -26,7 +26,7 @@ namespace ShopManager.Controllers
 
             if (provinces.Count == 0)
                 return Content(HttpStatusCode.ServiceUnavailable, "Could not get provinces with places from database.");
-
+            
             return Ok(provinces);
         }
     }
