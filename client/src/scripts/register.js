@@ -1,10 +1,12 @@
 // Variables
-var provincesWithPlaces = [];
-var registrationFormElem;
-var loginInputElem;
-var provinceSelectElem;
-var placeInputElem;
-var bottomLoadingDivElem;
+let provincesWithPlaces = [];
+let registrationFormElem;
+let loginInputElem;
+let provinceSelectElem;
+let placeInputElem;
+let bottomLoadingDivElem;
+
+const apiURL = "http://localhost:58481/api/";
 
 // Call onload after whole document will be loaded and all DOM elemnts will be available
 window.onload = function(){
@@ -50,13 +52,13 @@ window.onload = function(){
 
 function asyncOnloadFunctions(){
     // add more promises there
-    var promiseGetProvincesWithPlaces = getProvincesWithPlaces();
+    let promiseGetProvincesWithPlaces = getProvincesWithPlaces();
     
     return Promise.all([promiseGetProvincesWithPlaces]);
 }
 
 function getProvincesWithPlaces(){
-    var promise = fetch("http://localhost:58481/api/provincesWithPlaces")
+    let promise = fetch(`${apiURL}provincesWithPlaces`)
     .then(resp => resp.json())
     .then(resp => {
         resp.forEach(function(province){
@@ -70,7 +72,7 @@ function getProvincesWithPlaces(){
 // 
 function loadProvincesToSelect(){
     // Create default province option element with proper properties
-    var defaultOption = document.createElement("option");
+    let defaultOption = document.createElement("option");
     defaultOption.disabled = true;
     defaultOption.selected = true;
     defaultOption.text = "Choose province";
@@ -78,7 +80,7 @@ function loadProvincesToSelect(){
     provinceSelectElem.appendChild(defaultOption);
 
     provincesWithPlaces.forEach(function(province){
-        var option = document.createElement("option");
+        let option = document.createElement("option");
         option.textContent = province['ProvinceName'];
         option.value = province['ProvinceID'];
 
@@ -87,7 +89,7 @@ function loadProvincesToSelect(){
 };
 
 function attachPlacesListForProvinceToPlaceTextInput_onChange(){
-    var placesList = document.getElementById('selectedProvincePlacesList');
+    let placesList = document.getElementById('selectedProvincePlacesList');
     
     if(placesList===null)
     {
@@ -99,9 +101,9 @@ function attachPlacesListForProvinceToPlaceTextInput_onChange(){
         placesList.innerHTML = "";
     }
 
-    var selectedProvinceName = provinceSelectElem.options[provinceSelectElem.selectedIndex].text;
+    let selectedProvinceName = provinceSelectElem.options[provinceSelectElem.selectedIndex].text;
 
-    var selectedProvince;
+    let selectedProvince;
 
     for(province of provincesWithPlaces)
     {
@@ -119,7 +121,7 @@ function attachPlacesListForProvinceToPlaceTextInput_onChange(){
 
         for(place of selectedProvince["Places"])
         {
-            var placeOption = document.createElement("option");
+            let placeOption = document.createElement("option");
             placeOption.value = place["PlaceName"];
 
             placesList.appendChild(placeOption);
@@ -133,7 +135,7 @@ function attachPlacesListForProvinceToPlaceTextInput_onChange(){
 
 function registrationForm_onSubmit(e){
     e.preventDefault();
-    var formData = new FormData(registrationFormElem);
+    let formData = new FormData(registrationFormElem);
 
     
     
@@ -157,7 +159,7 @@ function loginInputElem_onChange()
 
 function validateProvinceSelectElem()
 {
-    var provinceNotSelected = provinceSelectElem.options[provinceSelectElem.selectedIndex].disabled;
+    let provinceNotSelected = provinceSelectElem.options[provinceSelectElem.selectedIndex].disabled;
     if(provinceNotSelected === true)
     {
         provinceSelectElem.setCustomValidity("Select province");
@@ -170,10 +172,10 @@ function validateRegisterFormData()
     
     validateProvinceSelectElem();
 
-    var formData = new FormData(registrationFormElem);
+    let formData = new FormData(registrationFormElem);
 
-    var login = formData.get("login");
-    var loginRegex = /(?=[^0-9])(?=[^a-z])(?=[^A-Z])/; //(?= expr) - using for ANDing
+    let login = formData.get("login");
+    let loginRegex = /(?=[^0-9])(?=[^a-z])(?=[^A-Z])/; //(?= expr) - using for ANDing
     if(loginRegex.test(login))
     {
         loginInputElem.setCustomValidity("Wrong characters");

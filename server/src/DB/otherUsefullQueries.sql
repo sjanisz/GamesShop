@@ -13,3 +13,7 @@ USE GameShopDB;
 --SELECT place.PLACE_NAME, prov.PROV_NAME FROM Place as place LEFT JOIN Province as prov
 --ON place.PROV_ID = prov.PROV_ID
 --WHERE place.PLACE_NAME IN (SELECT PLACE_NAME FROM Place GROUP BY PLACE_NAME HAVING COUNT(*) > 1)
+
+
+SELECT * FROM Province
+SELECT * FROM Place

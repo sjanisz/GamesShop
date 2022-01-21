@@ -10,7 +10,7 @@ namespace Service
     {
         public static string GetPolishCharactersSetRegex()
         {
-            return "A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ";
+            return "A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\\-";
         }
     }
 }

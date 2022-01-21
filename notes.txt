@@ -9,3 +9,12 @@ DATA VALIDATION LEVELS: backend layers + frontend?
 
 Best practices for webapi (especially table):
 https://docs.microsoft.com/pl-pl/azure/architecture/best-practices/api-design
+
+
+IIS:
+1. Install IIS from control panel
+2. In IIS GUI manager add new website
+
+zrobić dropa sprawdzić, czy znowu uzupełni całą bazę
+
+U:PAR: Dat-File is not compatible. Please use the "SRC"- File
