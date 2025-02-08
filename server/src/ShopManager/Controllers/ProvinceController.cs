@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Service.Model;
 
 namespace ShopManager.Controllers
@@ -22,6 +18,8 @@ namespace ShopManager.Controllers
         [Route("api/provincesWithPlaces")]
         public IHttpActionResult GetProvincesWithPlaces()
         {
+            return Ok("=)");
+
             List<Province> provinces = service.GetAllProvincesWithPlaces();
 
             if (provinces.Count == 0)
